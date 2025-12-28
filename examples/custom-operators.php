@@ -7,7 +7,7 @@
  * This example demonstrates how to create and register custom operators.
  */
 
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__.'/../vendor/autoload.php';
 
 use RuleEngine\Expression\LiteralExpression;
 use RuleEngine\Expression\OperatorExpression;
@@ -33,6 +33,7 @@ class IsEvenOperator implements OperatorInterface
     public function execute(array $operands): bool
     {
         $value = $operands[0];
+
         return is_int($value) && $value % 2 === 0;
     }
 }
@@ -54,7 +55,7 @@ class IsPrimeOperator implements OperatorInterface
     {
         $value = $operands[0];
 
-        if (!is_int($value) || $value < 2) {
+        if (! is_int($value) || $value < 2) {
             return false;
         }
 
@@ -128,7 +129,7 @@ echo "- IS_PALINDROME: Check if a string is a palindrome\n\n";
 
 // Example 1: Using IS_EVEN operator
 echo "Example 1: IS_EVEN Operator\n";
-echo str_repeat('-', 50) . "\n";
+echo str_repeat('-', 50)."\n";
 
 $evenExpression = new OperatorExpression(
     new IsEvenOperator(),
@@ -138,13 +139,13 @@ $evenExpression = new OperatorExpression(
 $testNumbers = [2, 3, 10, 15, 100];
 foreach ($testNumbers as $num) {
     $result = $engine->evaluateExpression($evenExpression, ['number' => $num]);
-    echo "Is {$num} even? " . ($result ? 'Yes' : 'No') . "\n";
+    echo "Is {$num} even? ".($result ? 'Yes' : 'No')."\n";
 }
 echo "\n";
 
 // Example 2: Using IS_PRIME operator
 echo "Example 2: IS_PRIME Operator\n";
-echo str_repeat('-', 50) . "\n";
+echo str_repeat('-', 50)."\n";
 
 $primeExpression = new OperatorExpression(
     new IsPrimeOperator(),
@@ -154,33 +155,33 @@ $primeExpression = new OperatorExpression(
 $testNumbers = [2, 3, 4, 5, 11, 15, 17, 20];
 foreach ($testNumbers as $num) {
     $result = $engine->evaluateExpression($primeExpression, ['number' => $num]);
-    echo "Is {$num} prime? " . ($result ? 'Yes' : 'No') . "\n";
+    echo "Is {$num} prime? ".($result ? 'Yes' : 'No')."\n";
 }
 echo "\n";
 
 // Example 3: Using BETWEEN operator
 echo "Example 3: BETWEEN Operator\n";
-echo str_repeat('-', 50) . "\n";
+echo str_repeat('-', 50)."\n";
 
 $betweenExpression = new OperatorExpression(
     new BetweenOperator(),
     [
         new VariableExpression('score'),
         new LiteralExpression(60),
-        new LiteralExpression(100)
+        new LiteralExpression(100),
     ]
 );
 
 $testScores = [45, 60, 75, 85, 100, 105];
 foreach ($testScores as $score) {
     $result = $engine->evaluateExpression($betweenExpression, ['score' => $score]);
-    echo "Is score {$score} between 60-100? " . ($result ? 'Yes (Pass)' : 'No (Fail)') . "\n";
+    echo "Is score {$score} between 60-100? ".($result ? 'Yes (Pass)' : 'No (Fail)')."\n";
 }
 echo "\n";
 
 // Example 4: Using IS_PALINDROME operator
 echo "Example 4: IS_PALINDROME Operator\n";
-echo str_repeat('-', 50) . "\n";
+echo str_repeat('-', 50)."\n";
 
 $palindromeExpression = new OperatorExpression(
     new IsPalindromeOperator(),
@@ -190,13 +191,13 @@ $palindromeExpression = new OperatorExpression(
 $testStrings = ['racecar', 'hello', 'A man a plan a canal Panama', 'test', 'madam'];
 foreach ($testStrings as $str) {
     $result = $engine->evaluateExpression($palindromeExpression, ['text' => $str]);
-    echo "Is '{$str}' a palindrome? " . ($result ? 'Yes' : 'No') . "\n";
+    echo "Is '{$str}' a palindrome? ".($result ? 'Yes' : 'No')."\n";
 }
 echo "\n";
 
 // Example 5: Combining custom operators in rules
 echo "Example 5: Combining Custom Operators in Rules\n";
-echo str_repeat('-', 50) . "\n";
+echo str_repeat('-', 50)."\n";
 
 // Create a rule using custom operators directly
 $primeInRangeCondition = new OperatorExpression(
@@ -211,9 +212,9 @@ $primeInRangeCondition = new OperatorExpression(
             [
                 new VariableExpression('candidate'),
                 new LiteralExpression(10),
-                new LiteralExpression(50)
+                new LiteralExpression(50),
             ]
-        )
+        ),
     ]
 );
 

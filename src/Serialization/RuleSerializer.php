@@ -86,7 +86,7 @@ final class RuleSerializer
                 ),
             ],
             default => throw new \RuntimeException(
-                'Unknown expression type: ' . get_class($expression)
+                'Unknown expression type: '.get_class($expression)
             ),
         };
     }

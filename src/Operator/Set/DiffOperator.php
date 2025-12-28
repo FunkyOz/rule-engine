@@ -23,11 +23,11 @@ final class DiffOperator extends AbstractOperator
         $first = $operands[0];
         $second = $operands[1];
 
-        if (!is_array($first)) {
+        if (! is_array($first)) {
             return [];
         }
 
-        if (!is_array($second)) {
+        if (! is_array($second)) {
             return array_values($first);
         }
 

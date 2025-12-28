@@ -10,7 +10,9 @@ use RuleEngine\Registry\OperatorRegistryInterface;
 final class RuleBuilder
 {
     private ?string $name = null;
+
     private ?ExpressionInterface $condition = null;
+
     /** @var array<string, mixed> */
     private array $metadata = [];
 
@@ -34,7 +36,7 @@ final class RuleBuilder
     }
 
     /**
-     * @param array<string, mixed> $metadata
+     * @param  array<string, mixed>  $metadata
      */
     public function metadata(array $metadata): self
     {

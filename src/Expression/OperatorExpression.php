@@ -10,7 +10,7 @@ use RuleEngine\Operator\OperatorInterface;
 final readonly class OperatorExpression implements ExpressionInterface
 {
     /**
-     * @param array<int, ExpressionInterface> $operands
+     * @param  array<int, ExpressionInterface>  $operands
      */
     public function __construct(
         private OperatorInterface $operator,

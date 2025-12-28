@@ -28,11 +28,11 @@ final readonly class LiteralExpression implements ExpressionInterface
         return match (true) {
             is_null($this->value) => 'null',
             is_bool($this->value) => $this->value ? 'true' : 'false',
-            is_string($this->value) => '"' . addslashes($this->value) . '"',
-            is_array($this->value) => '[' . implode(', ', array_map(
+            is_string($this->value) => '"'.addslashes($this->value).'"',
+            is_array($this->value) => '['.implode(', ', array_map(
                 fn ($v) => (new self($v))->__toString(),
                 $this->value
-            )) . ']',
+            )).']',
             default => (string) $this->value,
         };
     }

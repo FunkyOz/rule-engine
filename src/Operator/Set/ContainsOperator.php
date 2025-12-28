@@ -20,7 +20,7 @@ final class ContainsOperator extends AbstractOperator
         $haystack = $operands[0];
         $needle = $operands[1];
 
-        if (!is_array($haystack)) {
+        if (! is_array($haystack)) {
             return false;
         }
 

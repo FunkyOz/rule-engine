@@ -25,7 +25,8 @@ abstract class AbstractOperator implements OperatorInterface
     /**
      * Validate the number of operands.
      *
-     * @param array<int, mixed> $operands
+     * @param  array<int, mixed>  $operands
+     *
      * @throws \InvalidArgumentException
      */
     protected function validateOperandCount(array $operands): void
@@ -39,6 +40,7 @@ abstract class AbstractOperator implements OperatorInterface
                     sprintf('Operator "%s" requires at least 1 operand, %d given', $this->name, $count)
                 );
             }
+
             return;
         }
 

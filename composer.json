@@ -1,7 +1,7 @@
 {
     "name": "funkyoz/rule-engine",
     "type": "library",
-    "description": "A flexible and extensible rule engine for PHP, supporting logical operators, mathematical operations, and set operations",
+    "description": "A flexible and extensible rule engine for PHP, supporting logical operators, mathematical operations, set and strings operations",
     "license": "MIT",
     "version": "1.0.0",
     "autoload": {

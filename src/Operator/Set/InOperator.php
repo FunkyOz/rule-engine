@@ -20,7 +20,7 @@ final class InOperator extends AbstractOperator
         $needle = $operands[0];
         $haystack = $operands[1];
 
-        if (!is_array($haystack)) {
+        if (! is_array($haystack)) {
             return false;
         }
 

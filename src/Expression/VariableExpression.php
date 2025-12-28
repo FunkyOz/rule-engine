@@ -25,6 +25,6 @@ final readonly class VariableExpression implements ExpressionInterface
 
     public function __toString(): string
     {
-        return '$' . $this->name;
+        return '$'.$this->name;
     }
 }

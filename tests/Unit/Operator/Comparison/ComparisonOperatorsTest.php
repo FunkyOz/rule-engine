@@ -5,11 +5,11 @@ declare(strict_types=1);
 use RuleEngine\Operator\Comparison\EqualOperator;
 use RuleEngine\Operator\Comparison\GreaterThanOperator;
 use RuleEngine\Operator\Comparison\GreaterThanOrEqualOperator;
+use RuleEngine\Operator\Comparison\IdenticalOperator;
 use RuleEngine\Operator\Comparison\LessThanOperator;
 use RuleEngine\Operator\Comparison\LessThanOrEqualOperator;
 use RuleEngine\Operator\Comparison\NotEqualOperator;
-use RuleEngine\Operator\Comparison\StrictEqualOperator;
-use RuleEngine\Operator\Comparison\StrictNotEqualOperator;
+use RuleEngine\Operator\Comparison\NotIdenticalOperator;
 
 // EqualOperator Tests
 test('EqualOperator name', function (): void {
@@ -215,79 +215,79 @@ test('GreaterThanOrEqualOperator throws on invalid operand count', function (): 
     $operator->execute([5]);
 })->throws(InvalidArgumentException::class);
 
-// StrictEqualOperator Tests
-test('StrictEqualOperator name', function (): void {
-    $operator = new StrictEqualOperator();
+// IdenticalOperator Tests
+test('IdenticalOperator name', function (): void {
+    $operator = new IdenticalOperator();
     expect($operator->getName())->toBe('===');
 });
 
-test('StrictEqualOperator arity', function (): void {
-    $operator = new StrictEqualOperator();
+test('IdenticalOperator arity', function (): void {
+    $operator = new IdenticalOperator();
     expect($operator->getArity())->toBe(2);
 });
 
-test('StrictEqualOperator returns true for strictly equal values', function (): void {
-    $operator = new StrictEqualOperator();
+test('IdenticalOperator returns true for strictly equal values', function (): void {
+    $operator = new IdenticalOperator();
     expect($operator->execute([5, 5]))->toBeTrue();
     expect($operator->execute(['hello', 'hello']))->toBeTrue();
     expect($operator->execute([true, true]))->toBeTrue();
 });
 
-test('StrictEqualOperator returns false for unequal values', function (): void {
-    $operator = new StrictEqualOperator();
+test('IdenticalOperator returns false for unequal values', function (): void {
+    $operator = new IdenticalOperator();
     expect($operator->execute([5, 6]))->toBeFalse();
 });
 
-test('StrictEqualOperator uses strict comparison', function (): void {
-    $operator = new StrictEqualOperator();
+test('IdenticalOperator uses strict comparison', function (): void {
+    $operator = new IdenticalOperator();
     expect($operator->execute([5, '5']))->toBeFalse();
     expect($operator->execute([0, false]))->toBeFalse();
     expect($operator->execute([1, true]))->toBeFalse();
 });
 
-test('StrictEqualOperator handles null comparisons strictly', function (): void {
-    $operator = new StrictEqualOperator();
+test('IdenticalOperator handles null comparisons strictly', function (): void {
+    $operator = new IdenticalOperator();
     expect($operator->execute([null, null]))->toBeTrue();
     expect($operator->execute([null, 0]))->toBeFalse();
     expect($operator->execute([null, '']))->toBeFalse();
 });
 
-test('StrictEqualOperator throws on invalid operand count', function (): void {
-    $operator = new StrictEqualOperator();
+test('IdenticalOperator throws on invalid operand count', function (): void {
+    $operator = new IdenticalOperator();
     $operator->execute([5]);
 })->throws(InvalidArgumentException::class);
 
-// StrictNotEqualOperator Tests
-test('StrictNotEqualOperator name', function (): void {
-    $operator = new StrictNotEqualOperator();
+// NotIdenticalOperator Tests
+test('NotIdenticalOperator name', function (): void {
+    $operator = new NotIdenticalOperator();
     expect($operator->getName())->toBe('!==');
 });
 
-test('StrictNotEqualOperator arity', function (): void {
-    $operator = new StrictNotEqualOperator();
+test('NotIdenticalOperator arity', function (): void {
+    $operator = new NotIdenticalOperator();
     expect($operator->getArity())->toBe(2);
 });
 
-test('StrictNotEqualOperator returns true for strictly unequal values', function (): void {
-    $operator = new StrictNotEqualOperator();
+test('NotIdenticalOperator returns true for strictly unequal values', function (): void {
+    $operator = new NotIdenticalOperator();
     expect($operator->execute([5, 6]))->toBeTrue();
     expect($operator->execute(['hello', 'world']))->toBeTrue();
 });
 
-test('StrictNotEqualOperator returns false for strictly equal values', function (): void {
-    $operator = new StrictNotEqualOperator();
+test('NotIdenticalOperator returns false for strictly equal values', function (): void {
+    $operator = new NotIdenticalOperator();
     expect($operator->execute([5, 5]))->toBeFalse();
     expect($operator->execute(['hello', 'hello']))->toBeFalse();
 });
 
-test('StrictNotEqualOperator uses strict comparison', function (): void {
-    $operator = new StrictNotEqualOperator();
+test('NotIdenticalOperator uses strict comparison', function (): void {
+    $operator = new NotIdenticalOperator();
     expect($operator->execute([5, '5']))->toBeTrue();
     expect($operator->execute([0, false]))->toBeTrue();
     expect($operator->execute([1, true]))->toBeTrue();
 });
 
-test('StrictNotEqualOperator throws on invalid operand count', function (): void {
-    $operator = new StrictNotEqualOperator();
+test('NotIdenticalOperator throws on invalid operand count', function (): void {
+    $operator = new NotIdenticalOperator();
     $operator->execute([5]);
 })->throws(InvalidArgumentException::class);

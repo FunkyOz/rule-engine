@@ -13,6 +13,7 @@ use RuleEngine\Registry\OperatorRegistryInterface;
 final class ConditionBuilder
 {
     private ExpressionInterface $subject;
+
     private ?ExpressionInterface $currentCondition = null;
 
     public function __construct(
@@ -57,10 +58,20 @@ final class ConditionBuilder
         return $this->applyOperator('<=', $this->toExpression($value));
     }
 
+    public function identical(mixed $value): self
+    {
+        return $this->applyOperator('===', $this->toExpression($value));
+    }
+
+    public function notIdentical(mixed $value): self
+    {
+        return $this->applyOperator('!==', $this->toExpression($value));
+    }
+
     // Set operators
 
     /**
-     * @param array<mixed> $values
+     * @param  array<mixed>  $values
      */
     public function in(array $values): self
     {
@@ -68,7 +79,7 @@ final class ConditionBuilder
     }
 
     /**
-     * @param array<mixed> $values
+     * @param  array<mixed>  $values
      */
     public function notIn(array $values): self
     {

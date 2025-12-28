@@ -20,7 +20,7 @@ interface OperatorInterface
     /**
      * Execute the operator with the given evaluated operand values.
      *
-     * @param array<int, mixed> $operands The evaluated operand values
+     * @param  array<int, mixed>  $operands  The evaluated operand values
      */
     public function execute(array $operands): mixed;
 }

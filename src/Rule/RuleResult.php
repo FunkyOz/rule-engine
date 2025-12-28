@@ -32,7 +32,7 @@ final readonly class RuleResult
 
     public function failed(): bool
     {
-        return !$this->passed;
+        return ! $this->passed;
     }
 
     public function getContext(): ContextInterface

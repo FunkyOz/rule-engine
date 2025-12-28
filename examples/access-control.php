@@ -7,7 +7,7 @@
  * This example demonstrates using the rule engine for role-based access control.
  */
 
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__.'/../vendor/autoload.php';
 
 use RuleEngine\RuleEngine;
 
@@ -94,7 +94,7 @@ $scenarios = [
 
 foreach ($scenarios as $scenario) {
     echo "Scenario: {$scenario['name']}\n";
-    echo str_repeat('-', 50) . "\n";
+    echo str_repeat('-', 50)."\n";
 
     $context = [
         'user' => $scenario['user'],
@@ -108,6 +108,7 @@ foreach ($scenarios as $scenario) {
 
     if (empty($passingRules)) {
         echo "Access: DENIED - No permissions granted\n\n\n";
+
         continue;
     }
 
@@ -126,15 +127,15 @@ foreach ($scenarios as $scenario) {
 
     echo "\nPermissions:\n";
     foreach ($permissions as $permission) {
-        echo '- ' . strtoupper($permission) . "\n";
+        echo '- '.strtoupper($permission)."\n";
     }
 
     // Check specific actions
     echo "\nCan perform:\n";
-    echo '- Create: ' . (in_array('create', $permissions) ? 'Yes' : 'No') . "\n";
-    echo '- Read: ' . (in_array('read', $permissions) ? 'Yes' : 'No') . "\n";
-    echo '- Update: ' . (in_array('update', $permissions) ? 'Yes' : 'No') . "\n";
-    echo '- Delete: ' . (in_array('delete', $permissions) ? 'Yes' : 'No') . "\n";
+    echo '- Create: '.(in_array('create', $permissions) ? 'Yes' : 'No')."\n";
+    echo '- Read: '.(in_array('read', $permissions) ? 'Yes' : 'No')."\n";
+    echo '- Update: '.(in_array('update', $permissions) ? 'Yes' : 'No')."\n";
+    echo '- Delete: '.(in_array('delete', $permissions) ? 'Yes' : 'No')."\n";
 
     echo "\n\n";
 }

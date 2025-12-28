@@ -20,10 +20,10 @@ final class NotInOperator extends AbstractOperator
         $needle = $operands[0];
         $haystack = $operands[1];
 
-        if (!is_array($haystack)) {
+        if (! is_array($haystack)) {
             return true;
         }
 
-        return !in_array($needle, $haystack, strict: true);
+        return ! in_array($needle, $haystack, strict: true);
     }
 }

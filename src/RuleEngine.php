@@ -12,11 +12,11 @@ use RuleEngine\Expression\ExpressionInterface;
 use RuleEngine\Operator\Comparison\EqualOperator;
 use RuleEngine\Operator\Comparison\GreaterThanOperator;
 use RuleEngine\Operator\Comparison\GreaterThanOrEqualOperator;
+use RuleEngine\Operator\Comparison\IdenticalOperator;
 use RuleEngine\Operator\Comparison\LessThanOperator;
 use RuleEngine\Operator\Comparison\LessThanOrEqualOperator;
 use RuleEngine\Operator\Comparison\NotEqualOperator;
-use RuleEngine\Operator\Comparison\StrictEqualOperator;
-use RuleEngine\Operator\Comparison\StrictNotEqualOperator;
+use RuleEngine\Operator\Comparison\NotIdenticalOperator;
 use RuleEngine\Operator\Logical\AndOperator;
 use RuleEngine\Operator\Logical\NotOperator;
 use RuleEngine\Operator\Logical\OrOperator;
@@ -49,7 +49,9 @@ use RuleEngine\Rule\RuleSet;
 final class RuleEngine
 {
     private OperatorRegistryInterface $registry;
+
     private EvaluatorInterface $evaluator;
+
     private RuleSet $rules;
 
     public function __construct(
@@ -90,7 +92,7 @@ final class RuleEngine
     /**
      * Add multiple rules to the engine.
      *
-     * @param array<Rule> $rules
+     * @param  array<Rule>  $rules
      */
     public function addRules(array $rules): self
     {
@@ -128,7 +130,7 @@ final class RuleEngine
     /**
      * Evaluate a single rule by name.
      *
-     * @param array<string, mixed>|ContextInterface $context
+     * @param  array<string, mixed>|ContextInterface  $context
      */
     public function evaluate(string $ruleName, array|ContextInterface $context): bool
     {
@@ -146,7 +148,7 @@ final class RuleEngine
     /**
      * Evaluate a single rule and get detailed result.
      *
-     * @param array<string, mixed>|ContextInterface $context
+     * @param  array<string, mixed>|ContextInterface  $context
      */
     public function evaluateWithResult(string $ruleName, array|ContextInterface $context): RuleResult
     {
@@ -164,7 +166,7 @@ final class RuleEngine
     /**
      * Evaluate all rules and return true if all pass.
      *
-     * @param array<string, mixed>|ContextInterface $context
+     * @param  array<string, mixed>|ContextInterface  $context
      */
     public function evaluateAll(array|ContextInterface $context): bool
     {
@@ -176,7 +178,7 @@ final class RuleEngine
     /**
      * Evaluate all rules and return true if any pass.
      *
-     * @param array<string, mixed>|ContextInterface $context
+     * @param  array<string, mixed>|ContextInterface  $context
      */
     public function evaluateAny(array|ContextInterface $context): bool
     {
@@ -188,7 +190,7 @@ final class RuleEngine
     /**
      * Evaluate all rules and get detailed results.
      *
-     * @param array<string, mixed>|ContextInterface $context
+     * @param  array<string, mixed>|ContextInterface  $context
      * @return array<RuleResult>
      */
     public function evaluateAllWithResults(array|ContextInterface $context): array
@@ -201,7 +203,7 @@ final class RuleEngine
     /**
      * Get rules that pass for the given context.
      *
-     * @param array<string, mixed>|ContextInterface $context
+     * @param  array<string, mixed>|ContextInterface  $context
      * @return array<Rule>
      */
     public function getPassingRules(array|ContextInterface $context): array
@@ -214,7 +216,7 @@ final class RuleEngine
     /**
      * Get rules that fail for the given context.
      *
-     * @param array<string, mixed>|ContextInterface $context
+     * @param  array<string, mixed>|ContextInterface  $context
      * @return array<Rule>
      */
     public function getFailingRules(array|ContextInterface $context): array
@@ -227,7 +229,7 @@ final class RuleEngine
     /**
      * Evaluate an expression directly.
      *
-     * @param array<string, mixed>|ContextInterface $context
+     * @param  array<string, mixed>|ContextInterface  $context
      */
     public function evaluateExpression(ExpressionInterface $expression, array|ContextInterface $context): mixed
     {
@@ -273,7 +275,7 @@ final class RuleEngine
     }
 
     /**
-     * @param array<string, mixed>|ContextInterface $context
+     * @param  array<string, mixed>|ContextInterface  $context
      */
     private function normalizeContext(array|ContextInterface $context): ContextInterface
     {
@@ -296,8 +298,8 @@ final class RuleEngine
             new LessThanOrEqualOperator(),
             new GreaterThanOperator(),
             new GreaterThanOrEqualOperator(),
-            new StrictEqualOperator(),
-            new StrictNotEqualOperator(),
+            new IdenticalOperator(),
+            new NotIdenticalOperator(),
         ]);
 
         // Logical operators

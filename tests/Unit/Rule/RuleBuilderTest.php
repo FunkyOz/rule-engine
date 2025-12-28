@@ -7,11 +7,11 @@ use RuleEngine\Expression\LiteralExpression;
 use RuleEngine\Operator\Comparison\EqualOperator;
 use RuleEngine\Operator\Comparison\GreaterThanOperator;
 use RuleEngine\Operator\Comparison\GreaterThanOrEqualOperator;
+use RuleEngine\Operator\Comparison\IdenticalOperator;
 use RuleEngine\Operator\Comparison\LessThanOperator;
 use RuleEngine\Operator\Comparison\LessThanOrEqualOperator;
 use RuleEngine\Operator\Comparison\NotEqualOperator;
-use RuleEngine\Operator\Comparison\StrictEqualOperator;
-use RuleEngine\Operator\Comparison\StrictNotEqualOperator;
+use RuleEngine\Operator\Comparison\NotIdenticalOperator;
 use RuleEngine\Operator\Logical\AndOperator;
 use RuleEngine\Operator\Logical\NotOperator;
 use RuleEngine\Operator\Logical\OrOperator;
@@ -46,8 +46,8 @@ function registerDefaultOperatorsForRuleBuilder(OperatorRegistry $registry): voi
         new LessThanOrEqualOperator(),
         new GreaterThanOperator(),
         new GreaterThanOrEqualOperator(),
-        new StrictEqualOperator(),
-        new StrictNotEqualOperator(),
+        new IdenticalOperator(),
+        new NotIdenticalOperator(),
     ]);
 
     // Logical operators
@@ -309,4 +309,73 @@ test('fluent methods chaining returns builder', function (): void {
 
     $result4 = $builder->condition(new LiteralExpression(true));
     expect($result4)->toBe($builder);
+});
+
+test('identical method creates strict equality check', function (): void {
+    $builder = new RuleBuilder($this->registry);
+
+    $rule = $builder
+        ->name('strict_type_check')
+        ->when('value')->identical(5)
+        ->then()
+        ->build();
+
+    // Integer 5 passes
+    $context1 = Context::fromArray(['value' => 5]);
+    expect($rule->evaluate($context1))->toBeTrue();
+
+    // String "5" fails (strict comparison)
+    $context2 = Context::fromArray(['value' => '5']);
+    expect($rule->evaluate($context2))->toBeFalse();
+
+    // Type-coercible values fail
+    $context3 = Context::fromArray(['value' => 5.0]);
+    expect($rule->evaluate($context3))->toBeFalse();
+});
+
+test('notIdentical method creates strict inequality check', function (): void {
+    $builder = new RuleBuilder($this->registry);
+
+    $rule = $builder
+        ->name('not_strictly_null')
+        ->when('value')->notIdentical(null)
+        ->then()
+        ->build();
+
+    // Non-null values pass
+    $context1 = Context::fromArray(['value' => 0]);
+    expect($rule->evaluate($context1))->toBeTrue();
+
+    $context2 = Context::fromArray(['value' => false]);
+    expect($rule->evaluate($context2))->toBeTrue();
+
+    $context3 = Context::fromArray(['value' => '']);
+    expect($rule->evaluate($context3))->toBeTrue();
+
+    // Null fails
+    $context4 = Context::fromArray(['value' => null]);
+    expect($rule->evaluate($context4))->toBeFalse();
+});
+
+test('identical supports fluent chaining', function (): void {
+    $builder = new RuleBuilder($this->registry);
+
+    $rule = $builder
+        ->name('chained_identical')
+        ->when('type')->identical('admin')
+        ->andWhen('active')->identical(true)
+        ->then()
+        ->build();
+
+    // Both pass
+    $context1 = Context::fromArray(['type' => 'admin', 'active' => true]);
+    expect($rule->evaluate($context1))->toBeTrue();
+
+    // Type is string but different
+    $context2 = Context::fromArray(['type' => 'user', 'active' => true]);
+    expect($rule->evaluate($context2))->toBeFalse();
+
+    // Active is truthy but not strictly true
+    $context3 = Context::fromArray(['type' => 'admin', 'active' => 1]);
+    expect($rule->evaluate($context3))->toBeFalse();
 });

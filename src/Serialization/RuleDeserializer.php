@@ -23,7 +23,8 @@ final class RuleDeserializer
     /**
      * Deserialize a rule from an array.
      *
-     * @param array<string, mixed> $data
+     * @param  array<string, mixed>  $data
+     *
      * @throws DeserializationException
      */
     public function deserializeRule(array $data): Rule
@@ -47,7 +48,7 @@ final class RuleDeserializer
         try {
             $data = json_decode($json, true, 512, JSON_THROW_ON_ERROR);
         } catch (\JsonException $e) {
-            throw new DeserializationException('Invalid JSON: ' . $e->getMessage());
+            throw new DeserializationException('Invalid JSON: '.$e->getMessage());
         }
 
         return $this->deserializeRule($data);
@@ -56,12 +57,13 @@ final class RuleDeserializer
     /**
      * Deserialize a rule set from an array.
      *
-     * @param array<string, mixed> $data
+     * @param  array<string, mixed>  $data
+     *
      * @throws DeserializationException
      */
     public function deserializeRuleSet(array $data): RuleSet
     {
-        if (!isset($data['rules']) || !is_array($data['rules'])) {
+        if (! isset($data['rules']) || ! is_array($data['rules'])) {
             throw new DeserializationException('Invalid rule set data: missing "rules" array');
         }
 
@@ -84,7 +86,7 @@ final class RuleDeserializer
         try {
             $data = json_decode($json, true, 512, JSON_THROW_ON_ERROR);
         } catch (\JsonException $e) {
-            throw new DeserializationException('Invalid JSON: ' . $e->getMessage());
+            throw new DeserializationException('Invalid JSON: '.$e->getMessage());
         }
 
         return $this->deserializeRuleSet($data);
@@ -93,12 +95,13 @@ final class RuleDeserializer
     /**
      * Deserialize an expression from an array.
      *
-     * @param array<string, mixed> $data
+     * @param  array<string, mixed>  $data
+     *
      * @throws DeserializationException
      */
     public function deserializeExpression(array $data): ExpressionInterface
     {
-        if (!isset($data['type'])) {
+        if (! isset($data['type'])) {
             throw new DeserializationException('Expression data missing "type" field');
         }
 
@@ -113,11 +116,11 @@ final class RuleDeserializer
     }
 
     /**
-     * @param array<string, mixed> $data
+     * @param  array<string, mixed>  $data
      */
     private function deserializeLiteral(array $data): LiteralExpression
     {
-        if (!array_key_exists('value', $data)) {
+        if (! array_key_exists('value', $data)) {
             throw new DeserializationException('Literal expression missing "value" field');
         }
 
@@ -125,11 +128,11 @@ final class RuleDeserializer
     }
 
     /**
-     * @param array<string, mixed> $data
+     * @param  array<string, mixed>  $data
      */
     private function deserializeVariable(array $data): VariableExpression
     {
-        if (!isset($data['name'])) {
+        if (! isset($data['name'])) {
             throw new DeserializationException('Variable expression missing "name" field');
         }
 
@@ -137,15 +140,15 @@ final class RuleDeserializer
     }
 
     /**
-     * @param array<string, mixed> $data
+     * @param  array<string, mixed>  $data
      */
     private function deserializeOperator(array $data): OperatorExpression
     {
-        if (!isset($data['operator'])) {
+        if (! isset($data['operator'])) {
             throw new DeserializationException('Operator expression missing "operator" field');
         }
 
-        if (!isset($data['operands']) || !is_array($data['operands'])) {
+        if (! isset($data['operands']) || ! is_array($data['operands'])) {
             throw new DeserializationException('Operator expression missing "operands" array');
         }
 
@@ -160,20 +163,21 @@ final class RuleDeserializer
     }
 
     /**
-     * @param array<string, mixed> $data
+     * @param  array<string, mixed>  $data
+     *
      * @throws DeserializationException
      */
     private function validateRuleData(array $data): void
     {
-        if (!isset($data['name'])) {
+        if (! isset($data['name'])) {
             throw new DeserializationException('Rule data missing "name" field');
         }
 
-        if (!isset($data['condition'])) {
+        if (! isset($data['condition'])) {
             throw new DeserializationException('Rule data missing "condition" field');
         }
 
-        if (!is_array($data['condition'])) {
+        if (! is_array($data['condition'])) {
             throw new DeserializationException('Rule "condition" must be an array');
         }
     }

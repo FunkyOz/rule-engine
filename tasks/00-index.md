@@ -4,7 +4,7 @@ This directory contains all implementation tasks for building a comprehensive ru
 
 ## Overview
 
-**Total Tasks:** 18
+**Total Tasks:** 19
 **Current Status:** Planning Phase
 
 ---
@@ -111,6 +111,20 @@ Usage documentation and examples.
 - README with usage examples
 - API documentation
 - Example use cases
+
+---
+
+## Phase 7: Enhancements (Medium Priority)
+
+API improvements and additional features.
+
+| # | Task | Priority | Complexity | Status | Dependencies |
+|---|------|----------|------------|--------|--------------|
+| 19 | [Fluent API for Strict Comparison](19-fluent-identical-api.md) | Medium | Low | `done` | 07, 13 |
+
+**Deliverables:**
+- Renamed operators: `IdenticalOperator`, `NotIdenticalOperator`
+- Fluent API methods: `identical()`, `notIdentical()`
 
 ---
 

@@ -21,7 +21,7 @@ final class RuleSet
     }
 
     /**
-     * @param array<Rule> $rules
+     * @param  array<Rule>  $rules
      */
     public function addMany(array $rules): self
     {
@@ -68,7 +68,7 @@ final class RuleSet
     public function evaluateAll(ContextInterface $context): bool
     {
         foreach ($this->rules as $rule) {
-            if (!$rule->evaluate($context)) {
+            if (! $rule->evaluate($context)) {
                 return false;
             }
         }
@@ -125,7 +125,7 @@ final class RuleSet
     {
         return array_filter(
             $this->rules,
-            fn (Rule $rule) => !$rule->evaluate($context)
+            fn (Rule $rule) => ! $rule->evaluate($context)
         );
     }
 }

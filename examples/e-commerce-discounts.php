@@ -7,7 +7,7 @@
  * This example demonstrates how to use the rule engine for e-commerce discount logic.
  */
 
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__.'/../vendor/autoload.php';
 
 use RuleEngine\RuleEngine;
 
@@ -118,7 +118,7 @@ $scenarios = [
 
 foreach ($scenarios as $scenario) {
     echo "Scenario: {$scenario['name']}\n";
-    echo str_repeat('-', 50) . "\n";
+    echo str_repeat('-', 50)."\n";
 
     $context = $scenario['context'];
     $orderTotal = $context['order']['total'];
@@ -133,6 +133,7 @@ foreach ($scenarios as $scenario) {
     if (empty($passingRules)) {
         echo "No discounts apply.\n";
         echo "Final Total: \${$orderTotal}\n\n";
+
         continue;
     }
 
@@ -157,9 +158,9 @@ foreach ($scenarios as $scenario) {
 
     echo "\nCalculation:\n";
     echo "Subtotal: \${$orderTotal}\n";
-    echo 'Total Discount: ' . ($totalDiscount * 100) . "%\n";
-    echo 'Discount Amount: -$' . number_format($discountAmount, 2) . "\n";
-    echo 'Final Total: $' . number_format($finalTotal, 2) . "\n";
+    echo 'Total Discount: '.($totalDiscount * 100)."%\n";
+    echo 'Discount Amount: -$'.number_format($discountAmount, 2)."\n";
+    echo 'Final Total: $'.number_format($finalTotal, 2)."\n";
 
     if ($hasFreeShipping) {
         echo "Shipping: FREE\n";

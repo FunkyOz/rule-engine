@@ -10,11 +10,11 @@ use RuleEngine\Expression\VariableExpression;
 use RuleEngine\Operator\Comparison\EqualOperator;
 use RuleEngine\Operator\Comparison\GreaterThanOperator;
 use RuleEngine\Operator\Comparison\GreaterThanOrEqualOperator;
+use RuleEngine\Operator\Comparison\IdenticalOperator;
 use RuleEngine\Operator\Comparison\LessThanOperator;
 use RuleEngine\Operator\Comparison\LessThanOrEqualOperator;
 use RuleEngine\Operator\Comparison\NotEqualOperator;
-use RuleEngine\Operator\Comparison\StrictEqualOperator;
-use RuleEngine\Operator\Comparison\StrictNotEqualOperator;
+use RuleEngine\Operator\Comparison\NotIdenticalOperator;
 use RuleEngine\Operator\Logical\AndOperator;
 use RuleEngine\Operator\Logical\NotOperator;
 use RuleEngine\Operator\Logical\OrOperator;
@@ -49,8 +49,8 @@ function registerDefaultOperatorsForDeserializer(OperatorRegistry $registry): vo
         new LessThanOrEqualOperator(),
         new GreaterThanOperator(),
         new GreaterThanOrEqualOperator(),
-        new StrictEqualOperator(),
-        new StrictNotEqualOperator(),
+        new IdenticalOperator(),
+        new NotIdenticalOperator(),
     ]);
 
     // Logical operators

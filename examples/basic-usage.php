@@ -7,7 +7,7 @@
  * This example demonstrates the fundamental features of the PHP Rule Engine.
  */
 
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__.'/../vendor/autoload.php';
 
 use RuleEngine\RuleEngine;
 
@@ -28,7 +28,7 @@ $engine->addRule(
 
 $context1 = ['age' => 25];
 $result1 = $engine->evaluate('is_adult', $context1);
-echo "Age: {$context1['age']}, Is adult: " . ($result1 ? 'Yes' : 'No') . "\n\n";
+echo "Age: {$context1['age']}, Is adult: ".($result1 ? 'Yes' : 'No')."\n\n";
 
 // Example 2: Multiple conditions
 echo "Example 2: Premium member check\n";
@@ -44,13 +44,13 @@ $engine->addRule(
 $context2 = [
     'user' => [
         'tier' => 'premium',
-        'active' => true
-    ]
+        'active' => true,
+    ],
 ];
 
 $result2 = $engine->evaluate('premium_member', $context2);
-echo "Tier: {$context2['user']['tier']}, Active: " . ($context2['user']['active'] ? 'Yes' : 'No') . "\n";
-echo 'Is premium member: ' . ($result2 ? 'Yes' : 'No') . "\n\n";
+echo "Tier: {$context2['user']['tier']}, Active: ".($context2['user']['active'] ? 'Yes' : 'No')."\n";
+echo 'Is premium member: '.($result2 ? 'Yes' : 'No')."\n\n";
 
 // Example 3: Using IN operator
 echo "Example 3: Role-based access\n";
@@ -64,7 +64,7 @@ $engine->addRule(
 
 $context3 = ['role' => 'admin'];
 $result3 = $engine->evaluate('has_admin_access', $context3);
-echo "Role: {$context3['role']}, Has admin access: " . ($result3 ? 'Yes' : 'No') . "\n\n";
+echo "Role: {$context3['role']}, Has admin access: ".($result3 ? 'Yes' : 'No')."\n\n";
 
 // Example 4: String operations
 echo "Example 4: Email domain validation\n";
@@ -78,7 +78,7 @@ $engine->addRule(
 
 $context4 = ['email' => 'john@company.com'];
 $result4 = $engine->evaluate('company_email', $context4);
-echo "Email: {$context4['email']}, Is company email: " . ($result4 ? 'Yes' : 'No') . "\n\n";
+echo "Email: {$context4['email']}, Is company email: ".($result4 ? 'Yes' : 'No')."\n\n";
 
 // Example 5: Using metadata
 echo "Example 5: Discount rules with metadata\n";
@@ -94,8 +94,8 @@ $engine->addRule(
 
 $context5 = [
     'customer' => [
-        'points' => 1500
-    ]
+        'points' => 1500,
+    ],
 ];
 
 $result5 = $engine->evaluateWithResult('loyalty_discount', $context5);
@@ -105,7 +105,7 @@ if ($result5->passed()) {
     $message = $rule->getMeta('message');
 
     echo "Customer points: {$context5['customer']['points']}\n";
-    echo 'Discount: ' . ($discount * 100) . "%\n";
+    echo 'Discount: '.($discount * 100)."%\n";
     echo "Message: {$message}\n";
 }
 echo "\n";
@@ -127,18 +127,18 @@ $validationEngine->addRule(
     $validationEngine->builder()
         ->name('age_valid')
         ->when('age')->greaterThanOrEqual(0)
-                     ->lessThanOrEqual(150)
+        ->lessThanOrEqual(150)
         ->then()
         ->build()
 );
 
 $context6 = [
     'email' => 'test@example.com',
-    'age' => 25
+    'age' => 25,
 ];
 
 $allPass = $validationEngine->evaluateAll($context6);
-echo 'All validation rules pass: ' . ($allPass ? 'Yes' : 'No') . "\n";
+echo 'All validation rules pass: '.($allPass ? 'Yes' : 'No')."\n";
 
 $passingRules = $validationEngine->getPassingRules($context6);
 echo "Passing rules:\n";

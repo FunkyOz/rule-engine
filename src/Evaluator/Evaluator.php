@@ -25,7 +25,7 @@ final class Evaluator implements EvaluatorInterface
     /**
      * Evaluate multiple expressions and return all results.
      *
-     * @param array<ExpressionInterface> $expressions
+     * @param  array<ExpressionInterface>  $expressions
      * @return array<mixed>
      */
     public function evaluateAll(array $expressions, ContextInterface $context): array

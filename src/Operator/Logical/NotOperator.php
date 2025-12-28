@@ -17,6 +17,6 @@ final class NotOperator extends AbstractOperator
     {
         $this->validateOperandCount($operands);
 
-        return !$operands[0];
+        return ! $operands[0];
     }
 }

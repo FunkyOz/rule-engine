@@ -7,7 +7,7 @@
  * This example demonstrates using the rule engine for form validation.
  */
 
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__.'/../vendor/autoload.php';
 
 use RuleEngine\RuleEngine;
 
@@ -30,7 +30,7 @@ $engine->addRule(
     $engine->builder()
         ->name('valid_age')
         ->when('age')->greaterThanOrEqual(18)
-                     ->lessThanOrEqual(120)
+        ->lessThanOrEqual(120)
         ->then()
         ->meta('field', 'age')
         ->meta('error', 'Age must be between 18 and 120')
@@ -113,14 +113,14 @@ $scenarios = [
 
 foreach ($scenarios as $scenario) {
     echo "Scenario: {$scenario['name']}\n";
-    echo str_repeat('-', 50) . "\n";
+    echo str_repeat('-', 50)."\n";
 
     $data = $scenario['data'];
 
     echo "Form Data:\n";
     foreach ($data as $field => $value) {
         if ($field === 'password') {
-            echo "- {$field}: " . str_repeat('*', strlen($value)) . "\n";
+            echo "- {$field}: ".str_repeat('*', strlen($value))."\n";
         } else {
             echo "- {$field}: {$value}\n";
         }

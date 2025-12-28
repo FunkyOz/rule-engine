@@ -6,7 +6,7 @@ namespace RuleEngine\Operator\Comparison;
 
 use RuleEngine\Operator\AbstractOperator;
 
-final class StrictEqualOperator extends AbstractOperator
+final class IdenticalOperator extends AbstractOperator
 {
     public function __construct()
     {

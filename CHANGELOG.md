@@ -30,8 +30,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **Comparison Operators**: `=`, `!=`, `<`, `>`, `<=`, `>=`, `===`, `!==`
     - `EqualOperator`
     - `NotEqualOperator`
-    - `StrictEqualOperator`
-    - `StrictNotEqualOperator`
+    - `IdenticalOperator` (strict equality with `===`)
+    - `NotIdenticalOperator` (strict inequality with `!==`)
     - `LessThanOperator`
     - `LessThanOrEqualOperator`
     - `GreaterThanOperator`
@@ -77,7 +77,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Rule System**
   - `Rule` class representing evaluable rules with metadata support
   - `RuleBuilder` for fluent rule construction
-  - `ConditionBuilder` for chaining rule conditions
+  - `ConditionBuilder` for chaining rule conditions with fluent API methods:
+    - `identical($value)` - strict type and value equality check
+    - `notIdentical($value)` - strict type and value inequality check
+    - And all standard comparison operators
   - `RuleSet` for managing multiple rules
   - `RuleResult` for rule evaluation results
   - Support for rule metadata via `meta()` method

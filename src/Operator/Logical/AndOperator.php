@@ -18,7 +18,7 @@ final class AndOperator extends AbstractOperator
         $this->validateOperandCount($operands);
 
         foreach ($operands as $operand) {
-            if (!$operand) {
+            if (! $operand) {
                 return false;
             }
         }

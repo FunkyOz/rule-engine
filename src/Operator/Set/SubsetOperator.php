@@ -20,7 +20,7 @@ final class SubsetOperator extends AbstractOperator
         $subset = $operands[0];
         $superset = $operands[1];
 
-        if (!is_array($subset) || !is_array($superset)) {
+        if (! is_array($subset) || ! is_array($superset)) {
             return false;
         }
 

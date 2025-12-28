@@ -22,7 +22,7 @@ final class OperatorRegistry implements OperatorRegistryInterface
     /**
      * Register multiple operators at once.
      *
-     * @param array<OperatorInterface> $operators
+     * @param  array<OperatorInterface>  $operators
      */
     public function registerMany(array $operators): void
     {
@@ -33,7 +33,7 @@ final class OperatorRegistry implements OperatorRegistryInterface
 
     public function get(string $name): OperatorInterface
     {
-        if (!$this->has($name)) {
+        if (! $this->has($name)) {
             throw new OperatorNotFoundException($name);
         }
 

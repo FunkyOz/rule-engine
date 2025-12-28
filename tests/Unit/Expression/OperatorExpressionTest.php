@@ -52,7 +52,7 @@ test('evaluates binary operator', function (): void {
 });
 
 test('evaluates unary operator', function (): void {
-    $operator = createMockOperatorForExpression('NOT', 1, fn ($ops) => !$ops[0]);
+    $operator = createMockOperatorForExpression('NOT', 1, fn ($ops) => ! $ops[0]);
     $expression = new OperatorExpression(
         $operator,
         [new LiteralExpression(false)]
@@ -148,7 +148,7 @@ test('get operands returns operands', function (): void {
 });
 
 test('to string with unary operator', function (): void {
-    $operator = createMockOperatorForExpression('NOT', 1, fn ($ops) => !$ops[0]);
+    $operator = createMockOperatorForExpression('NOT', 1, fn ($ops) => ! $ops[0]);
     $expression = new OperatorExpression(
         $operator,
         [new LiteralExpression(true)]

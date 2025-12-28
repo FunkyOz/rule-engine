@@ -10,7 +10,7 @@ use RuleEngine\Expression\ExpressionInterface;
 final readonly class Rule
 {
     /**
-     * @param array<string, mixed> $metadata
+     * @param  array<string, mixed>  $metadata
      */
     public function __construct(
         private string $name,
