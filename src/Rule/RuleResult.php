@@ -6,12 +6,12 @@ namespace RuleEngine\Rule;
 
 use RuleEngine\Context\ContextInterface;
 
-final readonly class RuleResult
+final class RuleResult
 {
     public function __construct(
-        private Rule $rule,
-        private bool $passed,
-        private ContextInterface $context
+        private readonly Rule $rule,
+        private readonly bool $passed,
+        private readonly ContextInterface $context
     ) {
     }
 

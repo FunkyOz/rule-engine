@@ -7,15 +7,15 @@ namespace RuleEngine\Rule;
 use RuleEngine\Context\ContextInterface;
 use RuleEngine\Expression\ExpressionInterface;
 
-final readonly class Rule
+final class Rule
 {
     /**
      * @param  array<string, mixed>  $metadata
      */
     public function __construct(
-        private string $name,
-        private ExpressionInterface $condition,
-        private array $metadata = []
+        private readonly string $name,
+        private readonly ExpressionInterface $condition,
+        private readonly array $metadata = []
     ) {
     }
 

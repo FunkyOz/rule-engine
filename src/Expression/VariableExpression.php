@@ -6,10 +6,10 @@ namespace RuleEngine\Expression;
 
 use RuleEngine\Context\ContextInterface;
 
-final readonly class VariableExpression implements ExpressionInterface
+final class VariableExpression implements ExpressionInterface
 {
     public function __construct(
-        private string $name
+        private readonly string $name
     ) {
     }
 

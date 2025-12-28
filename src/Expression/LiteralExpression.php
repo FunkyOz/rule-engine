@@ -6,10 +6,10 @@ namespace RuleEngine\Expression;
 
 use RuleEngine\Context\ContextInterface;
 
-final readonly class LiteralExpression implements ExpressionInterface
+final class LiteralExpression implements ExpressionInterface
 {
     public function __construct(
-        private mixed $value
+        private readonly mixed $value
     ) {
     }
 

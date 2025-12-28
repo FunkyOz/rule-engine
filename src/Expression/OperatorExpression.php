@@ -7,14 +7,14 @@ namespace RuleEngine\Expression;
 use RuleEngine\Context\ContextInterface;
 use RuleEngine\Operator\OperatorInterface;
 
-final readonly class OperatorExpression implements ExpressionInterface
+final class OperatorExpression implements ExpressionInterface
 {
     /**
      * @param  array<int, ExpressionInterface>  $operands
      */
     public function __construct(
-        private OperatorInterface $operator,
-        private array $operands
+        private readonly OperatorInterface $operator,
+        private readonly array $operands
     ) {
     }
 
