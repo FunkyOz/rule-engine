@@ -31,10 +31,6 @@ services:
     env_file:
       - .env
 
-    # Networks
-    networks:
-      - php-network
-
     # Health check
     healthcheck:
       test: ["CMD", "php", "-v"]
@@ -56,12 +52,3 @@ volumes:
 
   bash-history:
     driver: local
-
-# Custom network
-networks:
-  php-network:
-    driver: bridge
-    name: php-dev-network
-    ipam:
-      config:
-        - subnet: 172.20.0.0/16
