@@ -17,7 +17,7 @@ A flexible and extensible rule engine for PHP, supporting logical operators, mat
 
 ## Requirements
 
-- PHP 8.2, 8.3, or 8.4
+- PHP >=8.1
 
 ## Installation
 
