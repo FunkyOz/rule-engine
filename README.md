@@ -9,7 +9,7 @@ A flexible and extensible rule engine for PHP, supporting logical operators, mat
 - **Comparison operators**: =, !=, <, >, <=, >=, ===, !==
 - **Mathematical operators**: +, -, *, /, %, ^ (power)
 - **Set operators**: IN, NOT_IN, CONTAINS, SUBSET, UNION, INTERSECT, DIFF
-- **String operators**: STARTS_WITH, ENDS_WITH, CONTAINS_STRING, MATCHES (regex)
+- **String operators**: STARTS_WITH, ENDS_WITH, CONTAINS_STRING, MATCHES (regex), CONCAT
 - **Nested variable access** with dot notation (e.g., `user.profile.age`)
 - **Rule serialization** to JSON for storage and persistence
 - **Extensible operator system** - easily add custom operators

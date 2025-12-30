@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use RuleEngine\Exception\InvalidRegexException;
+use RuleEngine\Operator\String\ConcatOperator;
 use RuleEngine\Operator\String\ContainsStringOperator;
 use RuleEngine\Operator\String\EndsWithOperator;
 use RuleEngine\Operator\String\MatchesOperator;
@@ -249,4 +250,80 @@ test('string operators handle empty strings', function (): void {
     expect($startsWith->execute(['', '']))->toBeTrue();
     expect($endsWith->execute(['', '']))->toBeTrue();
     expect($contains->execute(['', '']))->toBeTrue();
+});
+
+// ConcatOperator Tests
+test('ConcatOperator name', function (): void {
+    $operator = new ConcatOperator();
+    expect($operator->getName())->toBe('CONCAT');
+});
+
+test('ConcatOperator is variadic', function (): void {
+    $operator = new ConcatOperator();
+    expect($operator->getArity())->toBe(-1);
+});
+
+test('ConcatOperator concatenates two strings', function (): void {
+    $operator = new ConcatOperator();
+    expect($operator->execute(['Hello', ' World']))->toBe('Hello World');
+});
+
+test('ConcatOperator concatenates multiple strings', function (): void {
+    $operator = new ConcatOperator();
+    expect($operator->execute(['Hello', ' ', 'World', '!']))->toBe('Hello World!');
+});
+
+test('ConcatOperator casts integers to strings', function (): void {
+    $operator = new ConcatOperator();
+    expect($operator->execute([123, 456]))->toBe('123456');
+    expect($operator->execute(['Order #', 42]))->toBe('Order #42');
+});
+
+test('ConcatOperator casts floats to strings', function (): void {
+    $operator = new ConcatOperator();
+    expect($operator->execute([3.14, ' is pi']))->toBe('3.14 is pi');
+});
+
+test('ConcatOperator casts booleans to strings', function (): void {
+    $operator = new ConcatOperator();
+    expect($operator->execute(['Value: ', true]))->toBe('Value: 1');
+    expect($operator->execute(['Value: ', false]))->toBe('Value: ');
+});
+
+test('ConcatOperator casts null to empty string', function (): void {
+    $operator = new ConcatOperator();
+    expect($operator->execute(['Hello', null, 'World']))->toBe('HelloWorld');
+});
+
+test('ConcatOperator handles mixed types', function (): void {
+    $operator = new ConcatOperator();
+    expect($operator->execute(['Order ', '#', 123, ': $', 99.99]))
+        ->toBe('Order #123: $99.99');
+});
+
+test('ConcatOperator concatenates empty strings', function (): void {
+    $operator = new ConcatOperator();
+    expect($operator->execute(['', '', '']))->toBe('');
+});
+
+test('ConcatOperator handles single operand', function (): void {
+    $operator = new ConcatOperator();
+    expect($operator->execute(['Hello']))->toBe('Hello');
+});
+
+test('ConcatOperator throws on empty array', function (): void {
+    $operator = new ConcatOperator();
+    $operator->execute([]);
+})->throws(InvalidArgumentException::class);
+
+test('ConcatOperator handles unicode strings', function (): void {
+    $operator = new ConcatOperator();
+    expect($operator->execute(['Héllo', ' ', 'Wörld', '!']))->toBe('Héllo Wörld!');
+    expect($operator->execute(['こんにちは', '世界']))->toBe('こんにちは世界');
+});
+
+test('ConcatOperator handles special characters', function (): void {
+    $operator = new ConcatOperator();
+    expect($operator->execute(["Line1\n", 'Line2']))->toBe("Line1\nLine2");
+    expect($operator->execute(["Tab\t", 'Space ']))->toBe("Tab\tSpace ");
 });

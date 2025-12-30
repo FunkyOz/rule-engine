@@ -35,6 +35,7 @@ use RuleEngine\Operator\Set\IntersectOperator;
 use RuleEngine\Operator\Set\NotInOperator;
 use RuleEngine\Operator\Set\SubsetOperator;
 use RuleEngine\Operator\Set\UnionOperator;
+use RuleEngine\Operator\String\ConcatOperator;
 use RuleEngine\Operator\String\ContainsStringOperator;
 use RuleEngine\Operator\String\EndsWithOperator;
 use RuleEngine\Operator\String\MatchesOperator;
@@ -337,6 +338,7 @@ final class RuleEngine
             new EndsWithOperator(),
             new ContainsStringOperator(),
             new MatchesOperator(),
+            new ConcatOperator(),
         ]);
 
         return $registry;

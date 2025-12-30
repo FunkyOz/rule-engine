@@ -4,7 +4,7 @@ This directory contains all implementation tasks for building a comprehensive ru
 
 ## Overview
 
-**Total Tasks:** 19
+**Total Tasks:** 24
 **Current Status:** Planning Phase
 
 ---
@@ -128,6 +128,28 @@ API improvements and additional features.
 
 ---
 
+## Phase 8: String Concatenation (High Priority)
+
+Add string concatenation operator for combining strings in rules.
+
+| # | Task | Priority | Complexity | Status | Dependencies |
+|---|------|----------|------------|--------|--------------|
+| 20 | [Create ConcatOperator](20-concat-operator.md) | Critical | Low | `done` | None |
+| 21 | [Register ConcatOperator in Engine](21-register-concat-operator.md) | Critical | Low | `done` | 20 |
+| 22 | [Add Fluent API Support](22-fluent-api-concat.md) | High | Medium | `done` | 20, 21 |
+| 23 | [Write Unit Tests](23-concat-unit-tests.md) | High | Medium | `done` | 20, 21, 22 |
+| 24 | [Update Documentation](24-concat-documentation.md) | Medium | Low | `done` | 20, 21, 22, 23 |
+
+**Phase Duration:** 3-5 days
+**Deliverables:**
+- `ConcatOperator` class for string concatenation
+- Operator registration in default engine
+- Fluent API method: `concat()`
+- Comprehensive test suite with 100% type coverage
+- Updated documentation and examples
+
+---
+
 ## Architecture Overview
 
 ```
@@ -210,5 +232,5 @@ src/
 
 ---
 
-**Last Updated:** 2025-12-28
-**Document Version:** 1.0
+**Last Updated:** 2025-12-30
+**Document Version:** 1.1

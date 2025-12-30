@@ -301,3 +301,81 @@ test('complete workflow with multiple rules', function (): void {
     }
     expect($totalDiscount)->toBe(0.45);
 });
+
+// ConcatOperator Fluent API Tests
+test('fluent API concatenates strings', function (): void {
+    $rule = $this->engine->builder()
+        ->name('concat_test')
+        ->when('firstName')->concat(' ', '$lastName')->equals('John Doe')
+        ->then()
+        ->build();
+
+    $this->engine->addRule($rule);
+
+    expect($this->engine->evaluate('concat_test', [
+        'firstName' => 'John',
+        'lastName' => 'Doe',
+    ]))->toBeTrue();
+
+    expect($this->engine->evaluate('concat_test', [
+        'firstName' => 'Jane',
+        'lastName' => 'Doe',
+    ]))->toBeFalse();
+});
+
+test('fluent API concatenates with multiple variables', function (): void {
+    $rule = $this->engine->builder()
+        ->name('full_name')
+        ->when('firstName')->concat(' ', '$middleName', ' ', '$lastName')
+        ->equals('John Q Public')
+        ->then()
+        ->build();
+
+    $this->engine->addRule($rule);
+
+    expect($this->engine->evaluate('full_name', [
+        'firstName' => 'John',
+        'middleName' => 'Q',
+        'lastName' => 'Public',
+    ]))->toBeTrue();
+
+    expect($this->engine->evaluate('full_name', [
+        'firstName' => 'Jane',
+        'middleName' => 'Q',
+        'lastName' => 'Public',
+    ]))->toBeFalse();
+});
+
+test('fluent API chains concat with other string operators', function (): void {
+    $rule = $this->engine->builder()
+        ->name('chain_test')
+        ->when('firstName')->concat(' ', '$lastName')->startsWith('John')
+        ->then()
+        ->build();
+
+    $this->engine->addRule($rule);
+
+    expect($this->engine->evaluate('chain_test', [
+        'firstName' => 'John',
+        'lastName' => 'Doe',
+    ]))->toBeTrue();
+
+    expect($this->engine->evaluate('chain_test', [
+        'firstName' => 'Jane',
+        'lastName' => 'Doe',
+    ]))->toBeFalse();
+});
+
+test('concat operator with literal values', function (): void {
+    $rule = $this->engine->builder()
+        ->name('greeting')
+        ->when('name')->concat(' Jr.')->equals('John Jr.')
+        ->then()
+        ->build();
+
+    $this->engine->addRule($rule);
+
+    expect($this->engine->evaluate('greeting', [
+        'name' => 'John',
+    ]))->toBeTrue();
+});

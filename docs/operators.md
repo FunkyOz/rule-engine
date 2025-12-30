@@ -566,6 +566,58 @@ $builder->when('phone')->matches('/^\+\d{1,3}-\d{3}-\d{3}-\d{4}$/')
 
 ---
 
+### CONCAT
+
+Concatenates two or more strings together.
+
+**Fluent API:**
+```php
+$builder->when('firstName')->concat(' ', '$lastName')->equals('John Doe')
+```
+
+**Direct usage:**
+```php
+use RuleEngine\Operator\String\ConcatOperator;
+use RuleEngine\Expression\OperatorExpression;
+use RuleEngine\Expression\VariableExpression;
+use RuleEngine\Expression\LiteralExpression;
+
+$expr = new OperatorExpression(
+    new ConcatOperator(),
+    [
+        new VariableExpression('firstName'),
+        new LiteralExpression(' '),
+        new VariableExpression('lastName')
+    ]
+);
+```
+
+**Examples:**
+```php
+// Concatenate with literal strings
+$builder->when('firstName')->concat(' ', '$lastName')->equals('John Doe')
+
+// Context: ['firstName' => 'John', 'lastName' => 'Doe']
+// Result: 'John Doe'
+
+// Multiple concatenations
+$builder->when('title')->concat(': ', '$description')->containsString('Important')
+
+// With variable references
+$builder->when('firstName')
+    ->concat(' ', '$middleInitial', '. ', '$lastName')
+    ->equals('John Q. Public')
+
+// Type coercion - all operands are cast to strings
+// Context: ['orderPrefix' => 'ORD', 'orderId' => 123]
+$builder->when('orderPrefix')->concat('#', '$orderId')->equals('ORD#123')
+// 'ORD' + '#' + '123' = 'ORD#123'
+```
+
+**Note:** All operands are automatically cast to strings. Numbers, booleans, and null values are converted before concatenation.
+
+---
+
 ## Using Operators Directly
 
 While the fluent API is recommended, you can use operators directly:

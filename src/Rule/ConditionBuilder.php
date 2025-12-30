@@ -113,6 +113,25 @@ final class ConditionBuilder
         return $this->applyOperator('MATCHES', new LiteralExpression($pattern));
     }
 
+    /**
+     * Concatenate the subject with one or more strings.
+     *
+     * @param  mixed  ...$values  Values to concatenate with the subject
+     */
+    public function concat(mixed ...$values): self
+    {
+        $expressions = [$this->subject];
+
+        foreach ($values as $value) {
+            $expressions[] = $this->toExpression($value);
+        }
+
+        $operator = $this->registry->get('CONCAT');
+        $this->subject = new OperatorExpression($operator, $expressions);
+
+        return $this;
+    }
+
     // Logical operators
 
     public function and(callable $callback): self
